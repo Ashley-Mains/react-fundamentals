@@ -2,15 +2,56 @@
 <!-- http://localhost:3000/isolated/exercise/01.html -->
 
 <!-- 🐨 Create (in HTML) a <body> with a <div> with the id of "root" -->
+
 <!-- 🐨 Then create a <script type="module"> for your JavaScript -->
 
-<!-- These next instructions are to be written in JavaScript in the <script> tag -->
 <!-- 🐨 Create a div -->
 <!--   💰 document.createElement('div') -->
 
 <!-- 🐨 Set the div's textContent to 'Hello World' and className to 'container' -->
 <!--   💰 div.textContent = '...' -->
-
-<!-- 🐨 Append the div to the root div using `append` -->
+<!-- Append the div to the root div using `append` -->
 <!--   💰 document.getElementById('root') -->
 <!--   📜 https://developer.mozilla.org/en-US/docs/Web/API/ParentNode/append -->
+<!-- Exercise 1 -->
+<html>
+    <div id="root"></div>
+</html> <!-- Should I put this at the end of the file? -->
+
+<script type="module">
+    const helloWorldDiv = document.createElement('div');
+
+    //Is there a better way to write this?
+    helloWorldDiv.textContent = "Hello World";
+    helloWorldDiv.className = "container";
+
+    document.getElementById('root').append(helloWorldDiv);
+
+</script>
+
+<!-- EXTRA CREDIT
+<html>
+    <body></body>
+</html>
+
+<script type="module">
+
+    // extra credit- Create root node
+    const rootDiv = document.createElement('div');
+    const helloWorldDiv = document.createElement('div');
+
+    // EXTRA CREDIT- ADD ID
+    // Question: to Interpolate or to not interpolate?
+    rootDiv.id = "root";
+    // Solution option to setting ID
+    // rootDiv.setAttribute('id', 'root');
+    helloWorldDiv.textContent = "Hello World";
+    helloWorldDiv.className = "container";
+
+    // EXTRA CREDIT Append hello world to root
+    rootDiv.append(helloWorldDiv);
+    document.body.append(rootDiv);
+    // Why does this return undefined?
+    // document.body.append(rootDiv.append(helloWorldDiv));
+</script>
+-->
