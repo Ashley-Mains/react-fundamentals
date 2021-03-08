@@ -2,50 +2,103 @@
 <!-- http://localhost:3000/isolated/exercise/04.html -->
 
 <body>
-  <div id="root"></div>
-  <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
-
-  <script type="text/babel">
+<div id="root"></div>
+<script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+<!--💫💫💫💫💫 EXTRA CREDIT 4 💫💫💫💫💫💫 */ -->
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script type="text/babel">
     // 🐨 Make a function called `message` which returns the JSX we want to share
-  /* Incorrect
-  function message = () => {
-    const hello = 'Hello World'
-    const goodbye = 'Goodbye World'
-    return props = {hello,goodbye}
 
-  }
     // 🐨 use that function in place of the divs below with:
     // 💰 {message({children: 'Hello World'})} {message({children: 'Goodbye World'})}
-    const element = (
-      <div className="container">
-        <div className="message">Hello World</div>
-        <div className="message">Goodbye World</div>
-      </div>
-    )
-    const element = <div {...props}/> // if you want to override anything in props, put it on the rgt side of ...props
-*/
-     // Different Answer
-      function message(children){ //destructured props
-        return <div className ="message">{children}</div>
-  }
-    /*const element = (
-            <div className = "container">
-              React.createElement(message, {children:'Hello World'})
-              React.createElement(message, {children: 'Goodbye World'})
-            </div>
-    )*/
-    const className = "container"
-    // incorrect: const children = message('Hello World', 'Goodbye World')
-    const helloJSX = <message>Hello World</messgae>
-    const goodbyeJSX = <message> </message>
-    const props = {children, className}
-    const element = <div {...props}/>
-    // const reactElement = React.createElement(message, {children:'Hello World'})
+    // const element = (
+    //   <div className="container">
+    //     <div className="message">Hello World</div>
+    //     <div className="message">Goodbye World</div>
+    //   </div>
+    // )
 
+    /* 💫💫💫💫💫 SOLUTION 💫💫💫💫💫💫
+   const message = ({children}) => {
+     return <div className = "message">{children}</div>
+   }
+
+   // const msg = "message"
+   // const hello = "Hello World"
+   // const bye = "Goodbye World"
+   // const props = {msg, children}
+   const element =<div className = "container">
+     {message({children: 'Hello World'})}
+     {message({children: 'Goodbye World'})}
+   </div>
+   */
+
+    /*💫💫💫💫💫 EXTRA CREDIT 1 💫💫💫💫💫💫
+    const message = ({children}) => {
+      return <div className = "message">{children}</div>
+    }
+    const hello = {children: "Hello World"}
+    const element = <div className = "container">
+      {React.createElement(message, {children: "Hello World"})}
+      {React.createElement(message, {children: "Goodbye World"})}
+    </div>
+    */
+
+    /*💫💫💫💫💫 EXTRA CREDIT 2 💫💫💫💫💫💫
+    const Message = ({children}) => {
+      return <div className = "message">{children}</div>
+    }
+    // const helloElement = <Message>Hello World</Message>
+    // 📝 The below two lines are the same to JSX!
+    const element = <div className = "container">
+      <Message>Hello World</Message>
+      {React.createElement(Message, {children: "Goodbye World"})}
+    </div>
+    */
+
+    /*💫💫💫💫💫 EXTRA CREDIT 3 💫💫💫💫💫💫
+    const Message = ({subject, greeting}) => {
+        return <div className="message">
+          {greeting}, {subject}
+        </div>
+    }
+
+    const PropTypes = {
+      message(props, propName, Message){
+        if (typeof props[propName] !== 'string'){
+          return new Error(`Was expecting a ${propName}, but instead got a ${props[propName]}!`)
+        }
+      }
+    }
+    Message.propTypes = {
+      subject: PropTypes.message,
+      greeting: PropTypes.message,
+    }
+    const element = <div className="container">
+        <Message greeting="Hello" subject="World"/>
+        <Message greeting="Goodbye" subject="World"/>
+    </div>
+        * /
+    /*💫💫💫💫💫 EXTRA CREDIT 5 💫💫💫💫💫💫 */
+    const Message = ({subject, greeting}) => {
+        return <div className="message">
+          {greeting}, {subject}
+        </div>
+    }
+
+    Message.propTypes = {
+      subject: PropTypes.string.isRequired,
+      greeting: PropTypes.string.isRequired,
+    }
+    const element = <React.Fragment className="container">
+        <Message greeting="Hello" subject="World"/>
+        <Message greeting="Goodbye" subject="World"/>
+    </React.Fragment>
+        //* /
 
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
     ReactDOM.render(element, document.getElementById('root'))
-  </script>
+</script>
 </body>
